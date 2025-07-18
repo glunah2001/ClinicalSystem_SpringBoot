@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -30,19 +32,30 @@ public class User {
 
     @Column(nullable = false, unique = true, length = 12)
     private String cedula;
+
     @Column(nullable = false, length = 20)
     private String name;
+
     @Column(nullable = false, length = 20)
     private String firstLastname;
+
     @Column(nullable = false, length = 20)
     private String secondLastname;
+
     @Column(nullable = false, unique = true, length = 25)
     private String username;
+
     @Column(nullable = false, unique = true)
     private String email;
+
     @Column(nullable = false)
     private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
     private boolean active;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Token> tokens;
 }
