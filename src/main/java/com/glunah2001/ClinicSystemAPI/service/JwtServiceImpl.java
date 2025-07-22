@@ -1,5 +1,6 @@
 package com.glunah2001.ClinicSystemAPI.service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -34,6 +35,18 @@ public class JwtServiceImpl implements JwtService{
         return buildToken(user, refreshExpiration);
     }
 
+    @Override
+    public String getUsername(final String token) {
+        return getPayload(token)
+                .getSubject();
+    }
+
+    @Override
+    public boolean isTokenValid(String token, User user) {
+        var username = getUsername(token);
+        return username.equals(user.getUsername()) || !isTokenExpired(getExpiration(token));
+    }
+
     private String buildToken(final User user, long expiration){
         return Jwts.builder()
                 .subject(user.getUsername())
@@ -44,8 +57,26 @@ public class JwtServiceImpl implements JwtService{
                 .compact();
     }
 
+    private Date getExpiration(final String token){
+        return getPayload(token)
+                .getExpiration();
+    }
+
     private SecretKey getSecretKey(){
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+    private Claims getPayload(final String token){
+        return Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    private boolean isTokenExpired(Date expiration) {
+        return expiration.before(new Date());
+    }
+
 }

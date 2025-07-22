@@ -5,10 +5,8 @@ import com.glunah2001.ClinicSystemAPI.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -29,5 +27,17 @@ public class PatientController {
                 .buildAndExpand(user.getUsername())
                 .toUri();
         return ResponseEntity.created(location).body("Patient registered successfully");
+    }
+
+    @GetMapping("/test")
+    @PreAuthorize("hasRole('PATIENT')")
+    public ResponseEntity<?> test(){
+        return ResponseEntity.ok("Todo en orden capo");
+    }
+
+    @GetMapping("/test2")
+    @PreAuthorize("hasRole('DOCTOR')")
+    public ResponseEntity<?> test2(){
+        return ResponseEntity.ok("Todo en orden capo2");
     }
 }
