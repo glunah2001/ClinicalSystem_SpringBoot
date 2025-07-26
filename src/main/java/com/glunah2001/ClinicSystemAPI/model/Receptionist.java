@@ -1,7 +1,7 @@
 package com.glunah2001.ClinicSystemAPI.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.glunah2001.ClinicSystemAPI.enums.Shift;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 @Entity
 @Table(name = "receptionists")
-public class Receptionist {
-    private String direction;
-    private String cellphone;
-    //private User user;
+public class Receptionist extends User{
+    @Enumerated(EnumType.STRING)
+    private Shift shift;
+    @Column(nullable = false)
+    private String extensionNumber;
 }
