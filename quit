@@ -1,0 +1,31 @@
+[33mcommit ea2797e7c0061f2d1cc4b51396ac54ad3fec6a4e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32msecurityIntegration[m[33m)[m
+Author: glunah2001 <glunah2001@gmail.com>
+Date:   Mon Jul 21 19:24:29 2025 -0600
+
+    Security Filter Chain modified to restrict endpoints that requiere authorization
+    
+    Endpoint for refresh made and implementation of logic for refreshing access token and refresh implemented in services, as well as modification of the security filter chain for restricting endpoints requiring authorization.
+
+[33mcommit 13f97247223a5b466fd87dcef4fba18d7272498a[m
+Author: glunah2001 <glunah2001@gmail.com>
+Date:   Fri Jul 18 14:28:27 2025 -0600
+
+    Functional logIn endpoint.
+    
+    The AuthController endpoint '/login', authService, jwtService are already functional and AppConfig has been configured to allow the user authentication process.
+
+[33mcommit d354e5e8c0261de70590ae467350ae321399108d[m
+Author: glunah2001 <glunah2001@gmail.com>
+Date:   Thu Jul 17 21:15:03 2025 -0600
+
+    Starting the Spring Security integration
+    
+    I've started the Spring Security integration by adding the SecurityFilterChain and preparing the AuthenticationController.
+
+[33mcommit 25ab66ee6f6a284b7558b75306c17e9992409cad[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: glunah2001 <glunah2001@gmail.com>
+Date:   Thu Jul 17 14:12:37 2025 -0600
+
+     Clinical system first commit
+    
+    Scaffolding of the structure that the project will have (models, controllers, services, mappers, dtos, etc.). I have defined the environment variables and dependencies needed to develop this project.
